@@ -47,9 +47,10 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 html{
+  scroll-snap-type:y mandatory;
   scroll-behavior:smooth; -webkit-text-size-adjust:100%;
 }
-/* alçak ekranlarda kilit yumuşasın, kullanıcı sıkışmasın */
+@media (max-height:520px){ html{ scroll-snap-type:y proximity; } }   /* alçak ekranda sıkışma olmasın */
 
 body{
   margin:0;
@@ -220,6 +221,7 @@ body.gate-locked{ overflow:hidden; height:100%; }
 
 .scene{
   position:relative; min-height:0;
+  scroll-snap-align:start; scroll-snap-stop:always;
   display:grid; place-items:center;
   padding:calc(var(--mw) * .95) var(--pad) calc(var(--mw) * 1.25);
 }
@@ -383,7 +385,7 @@ body.gate-locked{ overflow:hidden; height:100%; }
    3 — KATILIM (LCV)
    ============================================================ */
 /* form uzayabilir: sayfa ekrandan uzunsa tarayıcı içinde serbestçe kaydırır */
-.scene.scene--rsvp{ padding-top:calc(var(--mw) * .9); padding-bottom:calc(var(--mw) * 1.25); }
+.scene.scene--rsvp{ scroll-snap-stop:normal; padding-top:calc(var(--mw) * .9); padding-bottom:calc(var(--mw) * 1.25); }
 
 .fams{ display:flex; align-items:stretch; justify-content:center; gap:clamp(14px,4.5vw,36px); }
 .fam{ flex:1 1 0; min-width:0; }
