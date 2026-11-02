@@ -125,6 +125,7 @@
       var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
       var ratio = vis / Math.min(r.height, vh);
       if (!locked && ratio >= 0.12) activatePage(pages[i]);
+      if (!locked && ratio >= 0.6) pages[i].classList.add('is-seen');   // sayfa gerçekten ekrandayken oynayan efektler için
 
       var d = Math.abs(r.top + r.height / 2 - vh / 2);
       if (d < bestD) { bestD = d; best = i; }
