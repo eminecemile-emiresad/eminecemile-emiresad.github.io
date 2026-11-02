@@ -141,7 +141,7 @@
 <!-- ================= DAVETİYE ================= -->
 <main id="invite" class="invite">
 
-  <!-- 1 — GİRİŞ -->
+  <!-- 1 — GİRİŞ (basılı davetiye gibi kare kart) -->
   <section class="scene scene--hero" id="hero" data-page="Giriş">
     <div class="wrap hero__inner">
       <h1 class="names rise">
@@ -159,10 +159,6 @@
       </div>
       <p class="count__note" id="countNote" hidden></p>
       <p class="hero__inv rise">Düğünümüze davetlisiniz.</p>
-      <a class="cue rise" href="#program">
-        <span>Davetiyeyi Keşfet</span>
-        <span class="cue__line" aria-hidden="true"></span>
-      </a>
     </div>
   </section>
 
@@ -177,17 +173,16 @@
           <p class="ev__d">27 Kasım 2026</p>
           <p class="ev__g">Cuma</p>
           <p class="ev__h">19.00 – 23.00</p>
-          <p class="ev__x ev__x--ico">
+          <div class="ev__x ev__x--ico">
             <svg class="nocam" aria-hidden="true"><use href="#m-nocam"/></svg>
-            <span>Kına gecesi hanımlar arasında olacaktır.</span>
-          </p>
+            <span>Kına, hanımlara mahsustur.</span>
+          </div>
           <p class="ev__v">Sebla Davet Salonu</p>
           <p class="ev__a">Atalar, Üsküdar Cd. No:148<br>Kartal / İstanbul</p>
           <div class="ev__acts">
             <a class="btn btn--sm btn--fill" href="#" target="_blank" rel="noopener" data-map="kina">Konum</a>
             <button class="btn btn--sm btn--line" type="button" data-ics="kina">Takvime Ekle</button>
           </div>
-          <p class="ev__n"></p>
         </article>
 
         <article class="ev ev--r rise">
@@ -195,25 +190,41 @@
           <p class="ev__d">29 Kasım 2026</p>
           <p class="ev__g">Pazar</p>
           <p class="ev__h">13.30 – 17.00</p>
-          <p class="ev__x">Nikâh saati: <b>14.30</b></p>
+          <div class="ev__x">
+            <p class="ev__nikah">NİKAH: 14.30</p>
+            <p class="ev__not">Not: Düğünümüz yemeklidir.</p>
+          </div>
           <p class="ev__v">Vizyon Davet Salonu</p>
           <p class="ev__a">Yenişehir Mh., Mustafa Akyol Cd.<br>Grup Center İş Merkezi<br>Pendik / İstanbul</p>
           <div class="ev__acts">
             <a class="btn btn--sm btn--fill" href="#" target="_blank" rel="noopener" data-map="dugun">Konum</a>
             <button class="btn btn--sm btn--line" type="button" data-ics="dugun">Takvime Ekle</button>
           </div>
-          <p class="ev__n">Not: Düğünümüz yemeklidir.</p>
         </article>
 
       </div>
     </div>
   </section>
 
-  <!-- 3 — KATILIM (LCV) -->
-  <section class="scene scene--rsvp" id="katilim" data-page="Katılım">
+  <!-- 3 — AİLELER, İLETİŞİM, LCV, PAYLAŞ -->
+  <section class="scene scene--rsvp" id="katilim" data-page="LCV">
     <div class="wrap">
-      <p class="label rise">LCV</p>
-      <h2 class="rsvp__t rise">Katılım Durumunu Bildir</h2>
+
+      <div class="fams rise">
+        <div class="fam">
+          <p class="fam__p">Elif &amp; İbrahim<br><b>ÇELEN</b></p>
+          <p class="fam__c"><span>İbrahim Çelen</span><a href="tel:+905336300388">533 630 03 88</a></p>
+        </div>
+        <span class="fams__sep" aria-hidden="true"></span>
+        <div class="fam">
+          <p class="fam__p">Nilüfer &amp; Mesut<br><b>GÜRSES</b></p>
+          <p class="fam__c"><span>Mesut Gürses</span><a href="tel:+905356020429">535 602 04 29</a></p>
+        </div>
+      </div>
+
+      <div class="rule rise" aria-hidden="true"><i></i><svg><use href="#m-star-solid"/></svg><i></i></div>
+
+      <h2 class="rsvp__t rise">LCV</h2>
 
       <form id="rsvpForm" class="rsvp rise" novalidate>
 
@@ -238,10 +249,6 @@
                 <input id="count-kina" name="count-kina" type="number" inputmode="numeric" min="1" max="12" value="1" />
                 <button type="button" class="stepper__b" data-step="1" aria-label="Artır">+</button>
               </div>
-            </div>
-            <div class="field">
-              <label for="note-kina">Not <i>(isteğe bağlı)</i></label>
-              <textarea id="note-kina" name="note-kina" rows="2" maxlength="300" placeholder="Bir dileğiniz ya da notunuz…"></textarea>
             </div>
           </div>
         </fieldset>
@@ -268,10 +275,6 @@
                 <button type="button" class="stepper__b" data-step="1" aria-label="Artır">+</button>
               </div>
             </div>
-            <div class="field">
-              <label for="note-dugun">Not <i>(isteğe bağlı)</i></label>
-              <textarea id="note-dugun" name="note-dugun" rows="2" maxlength="300" placeholder="Bir dileğiniz ya da notunuz…"></textarea>
-            </div>
           </div>
         </fieldset>
 
@@ -288,43 +291,8 @@
           <button class="btn btn--line" type="button" id="rsvpAgain">Bilgileri Düzenle</button>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 4 — İLETİŞİM / KAPANIŞ -->
-  <section class="scene scene--closing" id="kapanis" data-page="İletişim">
-    <div class="closing__night" aria-hidden="true"></div>
-
-    <svg class="closing__rose" viewBox="0 0 200 200" aria-hidden="true">
-      <g class="ring ring--inner">
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:22.5; transition-delay:400ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:67.5; transition-delay:445ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:112.5; transition-delay:490ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:157.5; transition-delay:535ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:202.5; transition-delay:580ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:247.5; transition-delay:625ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:292.5; transition-delay:670ms"/>
-        <path class="petal" d="M100 100 C 88 83 88 62 100 45 C 112 62 112 83 100 100 Z" style="--a:337.5; transition-delay:715ms"/>
-      </g>
-      <g class="ring ring--outer">
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:0; transition-delay:700ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:45; transition-delay:745ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:90; transition-delay:790ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:135; transition-delay:835ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:180; transition-delay:880ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:225; transition-delay:925ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:270; transition-delay:970ms"/>
-        <path class="petal" d="M100 100 C 83 76 83 46 100 22 C 117 46 117 76 100 100 Z" style="--a:315; transition-delay:1015ms"/>
-      </g>
-        <circle class="closing__heart" cx="100" cy="100" r="5"/>
-    </svg>
-
-    <div class="wrap closing__in">
-      <p class="label rise">İletişim</p>
-      <ul class="contacts rise" id="contacts"></ul>
-      <div class="rule rise" aria-hidden="true"><i></i><svg><use href="#m-star-solid"/></svg><i></i></div>
-      <h2 class="closing__n rise"><span class="ad">Emine Cemile</span> <i aria-hidden="true">&amp;</i> <span class="ad">Emir Es’ad</span></h2>
-      <div class="acts rise">
+      <div class="acts share rise">
         <button class="btn btn--line" type="button" id="shareBtn">WhatsApp’ta Paylaş</button>
       </div>
       <div class="mini rise">

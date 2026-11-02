@@ -15,11 +15,6 @@
     rsvpWhatsapp: '905541863452',
     // İsteğe bağlı: Formspree/Google Form gibi bir POST adresi. Boşsa form yerel olarak saklanır.
     rsvpEndpoint: '',
-    // İletişim: numarası boş olanlar sayfada gösterilmez. Örn. tel: '0532 000 00 00'
-    contacts: [
-      { name: 'Mesut Gürses', tel: '+90 535 602 04 29' },
-      { name: 'İbrahim Çelen', tel: '+90 533 630 03 88' }
-    ],
     events: {
       kina: {
         label: 'Kına',
@@ -28,7 +23,7 @@
         end:   '2026-11-27T23:00:00+03:00',
         venue: 'Sebla Davet Salonu, Atalar, Üsküdar Cd. No:148, Kartal / İstanbul',
         mapsQuery: 'Sebla Davet Salonu Atalar Üsküdar Cd. No:148 Kartal İstanbul',
-        note: 'Kına gecesi hanımlar arasında olacaktır.'
+        note: 'Kına, hanımlara mahsustur.'
       },
       dugun: {
         label: 'Düğün',
@@ -37,7 +32,7 @@
         end:   '2026-11-29T17:00:00+03:00',
         venue: 'Vizyon Davet Salonu, Yenişehir Mh., Mustafa Akyol Cd., Grup Center İş Merkezi, Pendik / İstanbul',
         mapsQuery: 'Vizyon Davet Salonu Grup Center İş Merkezi Mustafa Akyol Cd. Yenişehir Pendik İstanbul',
-        note: 'Nikâh saati 14.30. Düğünümüz yemeklidir.'
+        note: 'Nikah saati 14.30. Düğünümüz yemeklidir.'
       }
     }
   };
@@ -129,7 +124,7 @@
       // ekranda ne kadarı görünüyor?
       var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
       var ratio = vis / Math.min(r.height, vh);
-      if (!locked && ratio >= 0.3) activatePage(pages[i]);
+      if (!locked && ratio >= 0.12) activatePage(pages[i]);
 
       var d = Math.abs(r.top + r.height / 2 - vh / 2);
       if (d < bestD) { bestD = d; best = i; }
@@ -159,6 +154,7 @@
   function revealHero() {
     var hero = $('#hero');
     if (hero) activatePage(hero);
+    syncPages();   // ilk ekranda görünen diğer sayfa da belirsin
   }
 
   function openGate(withMusic) {
@@ -264,20 +260,6 @@
     var ev = CONFIG.events[a.dataset.map];
     if (ev) a.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ev.mapsQuery);
   });
-
-  /* ---------------- İLETİŞİM ---------------- */
-  (function () {
-    var ul = $('#contacts');
-    if (!ul) return;
-    var list = CONFIG.contacts.filter(function (c) { return c.tel; });
-    if (!list.length) { ul.hidden = true; return; }
-    list.forEach(function (c) {
-      var li = document.createElement('li');
-      var n = document.createElement('span'); n.className = 'contacts__n'; n.textContent = c.name;
-      var a = document.createElement('a'); a.href = 'tel:' + c.tel.replace(/[^\d+]/g, ''); a.textContent = c.tel;
-      li.appendChild(n); li.appendChild(a); ul.appendChild(li);
-    });
-  })();
 
   /* ============================================================
      6 — TAKVİME EKLE (.ics)
@@ -559,7 +541,6 @@
       lines.push(e.label.toUpperCase() + ' — katılacağım');
       lines.push('Ad Soyad: ' + e.name);
       lines.push('Kişi sayısı (siz dahil): ' + e.count);
-      if (e.note) lines.push('Not: ' + e.note);
     });
     return lines.join('\n');
   }
@@ -584,8 +565,7 @@
           key: k,
           label: CONFIG.events[k].label,
           name: name,
-          count: parseInt($('#count-' + k).value, 10) || 1,
-          note: $('#note-' + k).value.trim()
+          count: parseInt($('#count-' + k).value, 10) || 1
         });
       });
 
@@ -637,7 +617,6 @@
           box(en.key).checked = true;
           $('#name-' + en.key).value = en.name || '';
           $('#count-' + en.key).value = en.count || 1;
-          $('#note-' + en.key).value = en.note || '';
           body(en.key).hidden = false;
         });
       }
