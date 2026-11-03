@@ -624,3 +624,12 @@ body.gate-locked{ overflow:hidden; height:100%; }
   margin:0; padding:0 28px 12px 2px; font-size:12.5px; line-height:1.6; letter-spacing:.01em; color:var(--text);
   animation:fadeUp .45s var(--e) both;
 }
+
+/* Kına seçilince açılan uyarı */
+.rs__warn{
+  display:flex; align-items:center; gap:12px; margin:0 0 16px; padding:11px 12px;
+  border:1px solid rgba(168,40,46,.28); background:rgba(168,40,46,.045);
+}
+.rs__warn .nocam{ width:34px; height:34px; }
+.rs__warn p{ margin:0; font-size:12.5px; line-height:1.55; letter-spacing:.02em; color:var(--navy); text-align:left; }
+.rs__body:not([hidden]) .rs__warn .nocam{ animation:camGlow 2.4s ease-in-out .3s 1; }
