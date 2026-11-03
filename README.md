@@ -24,7 +24,7 @@ Mobil öncelikli; WhatsApp içinden açıldığında da sorunsuz çalışır.
 `script.js` dosyasının en üstündeki `CONFIG` bloğu:
 
 ```js
-siteUrl:       'https://emine-cemile-emir-esad.vercel.app/',  // yayın adresiniz
+siteUrl:       'https://eminecemile-emiresad.github.io/',  // yayın adresiniz
 rsvpWhatsapp:  '',   // katılımların geleceği numara, örn. '905321234567'
 rsvpEndpoint:  '',   // isteğe bağlı: Formspree vb. POST adresi
 ```
