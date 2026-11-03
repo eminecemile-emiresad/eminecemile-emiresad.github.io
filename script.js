@@ -454,6 +454,7 @@
   /* ============================================================
      9 — KATILIM FORMU (kına ve düğün ayrı)
      ============================================================ */
+  try { window.localStorage.removeItem('ee-rsvp'); } catch (e) {}   // eski sürümde kalan kayıtları temizle
   var form = $('#rsvpForm');
   var thanks = $('#rsvpThanks');
   var KEYS = ['kina', 'dugun'];
@@ -526,7 +527,7 @@
       if (!ok) { if (firstBad) firstBad.focus(); return; }
 
       var data = { entries: entries, at: new Date().toISOString() };
-      store('ee-rsvp', JSON.stringify(data));
+      store('ee-rsvp-2', JSON.stringify(data));
 
       if (CONFIG.rsvpEndpoint) {
         fetch(CONFIG.rsvpEndpoint, {
@@ -563,7 +564,7 @@
 
     // Daha önce doldurulmuşsa alanları geri getir
     try {
-      var saved = JSON.parse(store('ee-rsvp') || 'null');
+      var saved = JSON.parse(store('ee-rsvp-2') || 'null');
       if (saved && saved.entries) {
         saved.entries.forEach(function (en) {
           if (KEYS.indexOf(en.key) < 0) return;
