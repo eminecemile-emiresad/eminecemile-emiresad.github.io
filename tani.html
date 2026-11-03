@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tanı</title>
+<style>body{font:20px/1.6 sans-serif;margin:0;padding:16px;background:#fff;color:#111}b{color:#a00}</style></head>
+<body><h2>Ekran tanısı</h2><div id="o"></div>
+<script>
+function r(){
+ var v=window.visualViewport||{};
+ var rows=[
+  ['innerWidth (css px)',innerWidth],
+  ['innerHeight',innerHeight],
+  ['screen.width',screen.width],
+  ['devicePixelRatio',devicePixelRatio],
+  ['visualViewport.scale',v.scale],
+  ['visualViewport.width',v.width],
+  ['scrollWidth',document.documentElement.scrollWidth],
+  ['matchMedia hover:none',matchMedia('(hover:none)').matches],
+  ['userAgent',navigator.userAgent]
+ ];
+ document.getElementById('o').innerHTML=rows.map(function(x){return x[0]+': <b>'+x[1]+'</b>'}).join('<br>');
+}
+r(); addEventListener('resize',r);
+</script></body></html>
