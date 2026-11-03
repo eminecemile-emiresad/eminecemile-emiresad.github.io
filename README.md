@@ -38,12 +38,12 @@ rsvpEndpoint:  '',   // isteğe bağlı: Formspree vb. POST adresi
 
 ### Müzik
 
-Arka plan müziği `assets/music.m4a` dosyasıdır (AAC, ~1,6 MB).
+Arka plan müziği `assets/muzik-nesim.m4a` dosyasıdır (AAC, ~1,6 MB).
 Değiştirmek için yeni dosyayı aynı ada koyun ya da `index.html` içindeki
 `<audio ... data-src="...">` değerini güncelleyin. Büyük bir mp3'ü küçültmek için:
 
 ```bash
-afconvert -f m4af -d aac -b 96000 -s 3 girdi.mp3 assets/music.m4a
+afconvert -f m4af -d aac -b 96000 -s 3 girdi.mp3 assets/muzik-nesim.m4a
 ```
 
 Dosya bulunamazsa site sessizce devreye giren çok sade bir ezgi üretir; yani düğme
