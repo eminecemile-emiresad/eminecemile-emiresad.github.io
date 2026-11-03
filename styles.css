@@ -36,6 +36,7 @@
   --muted:      #63708C;
 
   --f-d: "Cormorant Garamond", "Cormorant Yedek", "Times New Roman", serif;
+  --f-name: "Pinyon Script", "Alex Brush", cursive;
   --f-script: "Alex Brush", "Snell Roundhand", "Apple Chancery", cursive;
   --f-s: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
@@ -272,9 +273,8 @@ body.gate-locked{ overflow:hidden; height:100%; }
 
 .names{ margin:0; font-family:var(--f-script); font-weight:400; line-height:1.02; }
 .names__l{
-  display:block; font-size:clamp(48px,14.6vw,76px);
-  color:var(--navy); white-space:nowrap; -webkit-text-stroke:.6px currentColor;
-}
+  display:block; font-family:var(--f-name); font-size:clamp(46px,14vw,72px);
+  color:var(--navy); white-space:nowrap; -webkit-text-stroke:.5px currentColor; line-height:1.12;}
 .names__amp{
   display:block; font-family:var(--f-script);
   font-size:clamp(32px,8.4vw,46px); color:var(--gold); margin:0; line-height:.9;
