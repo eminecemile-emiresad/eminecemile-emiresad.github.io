@@ -200,7 +200,7 @@ body.gate-locked{ overflow:hidden; height:100%; }
 /* ============================================================
    KENAR MOTİFLERİ — davetiye görselindeki lale ve geçme motifleri
    ============================================================ */
-:root{ --card-w:min(100vw, 560px); --card-h:calc(var(--card-w) * 1.5); }
+:root{ --card-w:min(100vw, 560px); --card-h:calc(var(--card-w) * 1.64); }
 .scene{ --mw:calc(var(--card-w) * .25); }
 .motifs{
   position:absolute; inset:0;
@@ -404,7 +404,6 @@ body.gate-locked{ overflow:hidden; height:100%; }
 /* form uzayabilir: sayfa ekrandan uzunsa tarayıcı içinde serbestçe kaydırır */
 .scene.scene--rsvp{ scroll-snap-stop:normal; padding-top:calc(var(--mw) * .8); padding-bottom:calc(var(--mw) * 1.05); }
 
-.scene--rsvp .rule{ margin:clamp(12px,3vw,18px) auto; }
 .scene--rsvp .rs{ margin-bottom:8px; padding-top:10px; }
 .scene--rsvp .share{ margin-top:14px; }
 .scene--rsvp .mini{ margin-top:14px; }
@@ -583,3 +582,10 @@ body.gate-locked{ overflow:hidden; height:100%; }
   .rise{ opacity:1 !important; transform:none !important; }
   .motifs{ opacity:1 !important; }
 }
+
+/* giriş kartında aileler ve telefonlar */
+.hero__inner .fams{ margin-top:clamp(14px,3vw,20px); }
+.hero__inner .fam__p{ font-size:clamp(12.5px,3.5vw,15px); line-height:1.5; }
+.hero__inner .fam__c{ margin-top:8px; gap:3px; }
+.hero__inner .fam__c span{ font-size:9px; letter-spacing:.16em; }
+.hero__inner .fam__c a{ font-size:clamp(13.5px,3.8vw,16px); }
