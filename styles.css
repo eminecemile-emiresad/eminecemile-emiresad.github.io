@@ -633,3 +633,10 @@ body.gate-locked{ overflow:hidden; height:100%; }
 .rs__warn .nocam{ width:34px; height:34px; }
 .rs__warn p{ margin:0; font-size:12.5px; line-height:1.55; letter-spacing:.02em; color:var(--navy); text-align:left; }
 .rs__body:not([hidden]) .rs__warn .nocam{ animation:camGlow 2.4s ease-in-out .3s 1; }
+
+/* Telefon masaüstü modunda: tüm içerik telefon genişliğine büyütülür */
+html.desk-phone .invite,
+html.desk-phone .gate__stage,
+html.desk-phone .music,
+html.desk-phone .dots,
+html.desk-phone .toast{ zoom:var(--dz); }

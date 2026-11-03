@@ -24,10 +24,23 @@
 <meta name="twitter:description" content="Kına 27 Kasım · Düğün 29 Kasım 2026" />
 <meta name="twitter:image" content="https://emine-cemile-emir-esad.vercel.app/assets/og-cover.png" />
 
+<script>
+/* Telefon masaüstü modunda açıldıysa (genişlik ~980, ekran dar) sayfayı telefona oturacak kadar büyüt */
+(function(){
+  try{
+    var phone = (screen.width <= 600 && matchMedia('(pointer:coarse)').matches) || /[?&]dm=1/.test(location.search);
+    if (phone && innerWidth > 700) {
+      var r = document.documentElement;
+      r.classList.add('desk-phone');
+      r.style.setProperty('--dz', (innerWidth / 560).toFixed(3));
+    }
+  }catch(e){}
+})();
+</script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="assets/favicon.svg" />
-<link rel="stylesheet" href="fonts.css?v=20261103r" />
-<link rel="stylesheet" href="styles.css?v=20261103r" />
+<link rel="stylesheet" href="fonts.css?v=20261103s" />
+<link rel="stylesheet" href="styles.css?v=20261103s" />
 </head>
 
 <body class="gate-locked">
@@ -306,6 +319,6 @@
 <nav class="dots" id="dots" aria-label="Davetiye sayfaları"></nav>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="script.js?v=20261103r"></script>
+<script src="script.js?v=20261103s"></script>
 </body>
 </html>
