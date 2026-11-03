@@ -348,8 +348,7 @@
   var musicBtn = $('#musicBtn');
   var audioEl = $('#bgAudio');
   var playing = false;
-  var ctx = null, synthTimer = null, master = null;
-
+  
   var MUSIC_VOL = 0.42;   // arka plan seviyesi
   var LOOP_FADE = 2.4;    // saniye — başta ve sonda yumuşak geçiş
   var envRAF = null;
@@ -377,47 +376,6 @@
     })(t0);
   }
 
-  // Basit, yumuşak bir arpej — mp3 yoksa devreye girer.
-  function synthStart() {
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return false;
-    if (!ctx) {
-      ctx = new AC();
-      master = ctx.createGain();
-      master.gain.value = 0.0001;
-      var verb = ctx.createBiquadFilter();
-      verb.type = 'lowpass'; verb.frequency.value = 1600;
-      master.connect(verb); verb.connect(ctx.destination);
-    }
-    if (ctx.state === 'suspended') ctx.resume();
-    master.gain.cancelScheduledValues(ctx.currentTime);
-    master.gain.setTargetAtTime(0.16, ctx.currentTime, 1.2);
-
-    // Hicaz esintili bir dizi
-    var scale = [293.66, 311.13, 369.99, 392.00, 440.00, 466.16, 554.37, 587.33];
-    var step = 0;
-    function note() {
-      if (!ctx) return;
-      var i = [0, 2, 3, 4, 3, 2, 1, 2, 4, 5, 6, 5, 4, 3, 2, 0][step % 16];
-      var f = scale[i] * (step % 32 < 16 ? 1 : 0.5);
-      var o = ctx.createOscillator(), g = ctx.createGain();
-      o.type = 'triangle'; o.frequency.value = f;
-      g.gain.setValueAtTime(0.0001, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.5, ctx.currentTime + 0.08);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.4);
-      o.connect(g); g.connect(master);
-      o.start(); o.stop(ctx.currentTime + 2.6);
-      step++;
-    }
-    note();
-    synthTimer = setInterval(note, 900);
-    return true;
-  }
-  function synthStop() {
-    clearInterval(synthTimer); synthTimer = null;
-    if (ctx && master) master.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.4);
-  }
-
   function setMusicState(on) {
     playing = on;
     if (musicBtn) {
@@ -427,25 +385,20 @@
   }
 
   function startMusic(silentFail) {
-    if (playing) return;
-    if (audioEl) {
-      if (!audioEl.src && audioEl.dataset.src) audioEl.src = audioEl.dataset.src;
-      audioEl.volume = 0;
-      var p = audioEl.play();
-      if (p && p.then) {
-        p.then(function () {
-          setMusicState(true);
-          stopEnvelope();
-          envelope();
-        }).catch(function () {
-          // mp3 yok ya da engellendi → sentezlenmiş ezgi
-          if (synthStart()) setMusicState(true);
-          else if (!silentFail) toast('Müzik bu cihazda başlatılamadı.');
-        });
-        return;
-      }
+    if (playing || !audioEl) return;
+    if (!audioEl.src && audioEl.dataset.src) audioEl.src = audioEl.dataset.src;
+    audioEl.volume = 0;
+    var p = audioEl.play();
+    if (p && p.then) {
+      p.then(function () {
+        setMusicState(true);
+        stopEnvelope();
+        envelope();
+      }).catch(function () {
+        // tarayıcı sesi engelledi ya da dosya yüklenemedi: sessiz kal, sentez müzik yok
+        if (!silentFail) toast('Müzik başlatılamadı. Düğmeye bir kez daha dokunun.');
+      });
     }
-    if (synthStart()) setMusicState(true);
   }
   function stopMusic() {
     if (audioEl && !audioEl.paused) {
@@ -453,7 +406,6 @@
       fadeVolume(audioEl, 0, 500);
       setTimeout(function () { audioEl.pause(); }, 520);
     }
-    synthStop();
     setMusicState(false);
   }
   if (musicBtn) {
@@ -495,8 +447,8 @@
     }, 400);
   })();
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden && playing) { stopEnvelope(); if (audioEl) audioEl.pause(); synthStop(); }
-    else if (!document.hidden && playing) { if (audioEl && audioEl.src && audioEl.readyState) { audioEl.play().then(function(){ stopEnvelope(); envelope(); }).catch(function(){}); } else if (!synthTimer) synthStart(); }
+    if (document.hidden && playing) { stopEnvelope(); if (audioEl) audioEl.pause(); }
+    else if (!document.hidden && playing) { if (audioEl && audioEl.src && audioEl.readyState) { audioEl.play().then(function(){ stopEnvelope(); envelope(); }).catch(function(){}); } }
   });
 
   /* ============================================================
